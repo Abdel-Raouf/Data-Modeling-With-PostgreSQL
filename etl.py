@@ -17,17 +17,17 @@ def process_song_file(cur, filepath):
     # important to put 'lines=True' as the second argument, to tell pandas to read the json file as a line separated json.
     df = pd.read_json(filepath, lines=True)
 
-    # insert song record
-    songs_columns = df[['song_id', 'title', 'artist_id',
-                        'year', 'duration']]
-    song_data = songs_columns.values[0].tolist()
+    # insert song records
+    songs_df = df[['song_id', 'title', 'artist_id',
+                   'year', 'duration']]
+    song_data = songs_df.values[0].tolist()
 
     cur.execute(song_table_insert, song_data)
 
     # insert artist record
-    artists_columns = df[['artist_id', 'artist_name',
-                          'artist_location', 'artist_longitude', 'artist_latitude']]
-    artist_data = artists_columns.values[0].tolist()
+    artists_df = df[['artist_id', 'artist_name',
+                     'artist_location', 'artist_longitude', 'artist_latitude']]
+    artist_data = artists_df.values[0].tolist()
     cur.execute(artist_table_insert, artist_data)
 
 
@@ -71,8 +71,8 @@ def process_log_file(cur, filepath):
         else:
             songid, artistid = None, None
 
-        # insert songplay record
-        songplay_data = [row.ts, row.userId, row.level,
+        # insert songplay record (getting data from dimensions into fact table)
+        songplay_data = [time_df['start_time'][index], user_df['userId'][index], user_df['level'][index],
                          songid, artistid, row.sessionId, row.location, row.userAgent]
         cur.execute(songplay_table_insert, songplay_data)
 

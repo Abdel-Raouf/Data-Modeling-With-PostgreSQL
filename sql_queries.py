@@ -11,7 +11,7 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 # Fact table
 songplay_table_create = (
-    "CREATE TABLE IF NOT EXISTS songplays(songplay_id SERIAL PRIMARY KEY, start_time BIGINT, user_id INT, level VARCHAR, song_id VARCHAR, \
+    "CREATE TABLE IF NOT EXISTS songplays(songplay_id SERIAL PRIMARY KEY, start_time TIMESTAMP, user_id INT, level VARCHAR, song_id VARCHAR, \
                                         artist_id VARCHAR, session_id INT, location VARCHAR, user_agent VARCHAR)")
 
 # dimesnion table
