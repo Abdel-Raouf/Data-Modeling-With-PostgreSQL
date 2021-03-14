@@ -72,7 +72,7 @@ def process_log_file(cur, filepath):
             songid, artistid = None, None
 
         # insert songplay record (getting data from dimensions into fact table)
-        songplay_data = [time_df['start_time'][index], user_df['userId'][index], user_df['level'][index],
+        songplay_data = [ts_to_dt[index], user_df['userId'][index], user_df['level'][index],
                          songid, artistid, row.sessionId, row.location, row.userAgent]
         cur.execute(songplay_table_insert, songplay_data)
 
