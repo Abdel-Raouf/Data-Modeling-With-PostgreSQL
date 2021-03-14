@@ -25,7 +25,7 @@ artist_table_create = ("CREATE TABLE IF NOT EXISTS artists(artist_id VARCHAR NOT
                         longitude FLOAT, latitude FLOAT)")
 # dimension table
 time_table_create = ("CREATE TABLE IF NOT EXISTS time(start_time TIMESTAMP PRIMARY KEY, hour INT, day INT, week_of_year INT, month INT, \
-                    year INT, week_day VARCHAR)")
+                    year INT, week_day INT)")
 
 # INSERT RECORDS
 
